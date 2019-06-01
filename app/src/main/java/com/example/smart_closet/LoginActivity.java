@@ -33,9 +33,11 @@ public class LoginActivity extends AppCompatActivity {
                 String sepass = password.getText().toString();
                 Boolean chkemailpass = db.emailpassword(semail, sepass);
                 if(chkemailpass == true) {
+//                    String name = db.getUserName(semail);
                     Toast.makeText(getApplicationContext(), semail + "님 반갑습니다", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-//                    intent.putExtra("semail", semail);
+                    intent.putExtra("email", semail);
+//                    intent.putExtra("name", name);
                     startActivity(intent);
                 } else {
                     Toast.makeText(getApplicationContext(), "wrong email or password", Toast.LENGTH_SHORT).show();

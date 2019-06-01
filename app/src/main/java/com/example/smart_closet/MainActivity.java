@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -29,10 +30,9 @@ import java.io.InputStream;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    DatabaseHelper DatabaseHelper;
+    DatabaseHelper DB;
     SQLiteDatabase sqlDB;
     ImageView imageView;
-    TextView userName, userMail;
     String name, mail;
 
     @Override
@@ -43,14 +43,9 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         imageView = (ImageView) findViewById(R.id.iv1);
-        userName = (TextView) findViewById(R.id.user_name);
-        userMail = (TextView) findViewById(R.id.user_mail);
-
-//        Intent intent = getIntent();
-//        mail = intent.getStringExtra("semail");
-//
-//        sqlDB = DatabaseHelper.getReadableDatabase();
-//        name = sqlDB.rawQuery("select name from user where eamil=mail", null).toString();
+        Intent intent = getIntent();
+        mail = intent.getStringExtra("email");
+//        name = intent.getStringExtra("name");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +64,14 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        View nav_header_view = navigationView.getHeaderView(0);
+        TextView nav_header_mail_text = (TextView) nav_header_view.findViewById(R.id.user_mail);
+        TextView nav_header_name_text = (TextView) nav_header_view.findViewById(R.id.user_name);
+        nav_header_mail_text.setText(mail);
+        nav_header_name_text.setText(mail);
+
+
     }
 
     @Override
@@ -84,11 +87,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-
-//        userName.setText(name);
-//        userMail.setText(mail);
         getMenuInflater().inflate(R.menu.main, menu);
-
         return true;
     }
 
