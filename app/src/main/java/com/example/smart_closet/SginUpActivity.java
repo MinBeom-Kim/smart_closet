@@ -35,6 +35,7 @@ public class SginUpActivity extends AppCompatActivity {
                 String sepass = edit_password.getText().toString();
                 String secpass = edit_con_password.getText().toString();
                 String sename = edit_name.getText().toString();
+                String profile = "@drawable/profile";
 
                 if(semail.equals("") || sepass.equals("") || secpass.equals("") || sename.equals("")) {
                     Toast.makeText(getApplicationContext(), "Fields are empty", Toast.LENGTH_SHORT).show();
@@ -42,7 +43,7 @@ public class SginUpActivity extends AppCompatActivity {
                     if (sepass.equals(secpass)) {
                         Boolean chkemail = db.chkemail(semail);
                         if (chkemail == true) {
-                            Boolean insert = db.insert(semail, sepass, sename);
+                            Boolean insert = db.insert(semail, sepass, sename, profile);
                             if (insert == true) {
                                 Toast.makeText(getApplicationContext(), "Registered Successfully", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);

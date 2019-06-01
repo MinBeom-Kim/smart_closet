@@ -16,20 +16,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table user(email text primary key, password text, name text);");
+        db.execSQL("create table user(email text primary key, password text, name text, profile text);");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("drop table if exists user");
+        onCreate(db);
     }
 
-    public boolean insert(String email, String password, String name) {
+    public boolean insert(String email, String password, String name, String profile) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("email", email);
         contentValues.put("password", password);
         contentValues.put("name", name);
+        contentValues.put("profile", profile);
         long ins = db.insert("user", null, contentValues);
         if(ins == 1) return false;
         else return true;
@@ -57,8 +59,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             if (cursor.moveToFirst()) {
                 String name = cursor.getString(cursor.getColumnIndex("name"));
                 String mail = cursor.getString(cursor.getColumnIndex("email"));
-                userData.add(name);
                 userData.add(mail);
+                userData.add(name);
             }
         }
         cursor.close();

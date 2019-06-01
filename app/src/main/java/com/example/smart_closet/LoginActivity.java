@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
                 Boolean chkemailpass = db.emailpassword(semail, sepass);
                 if(chkemailpass == true) {
                     ArrayList<String> userData = db.getUserData(semail);
-                    Toast.makeText(getApplicationContext(), semail + "님 반갑습니다", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), userData.get(1) + "님 반갑습니다", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     intent.putExtra("email", semail);
                     intent.putExtra("userData", userData);
