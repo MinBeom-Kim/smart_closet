@@ -17,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        imageView = (ImageView) findViewById(R.id.imageView);
+        imageView = (ImageView) findViewById(R.id.iv1);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -100,6 +101,7 @@ public class MainActivity extends AppCompatActivity
             intent = new Intent();
             intent.setType("image/*");
             intent.setAction(Intent.ACTION_GET_CONTENT);
+            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
             startActivityForResult(intent, 1);
             //Glide.with(this).load(R.drawable.img).into(iv);
         } else if (id == R.id.nav_share) {
@@ -116,17 +118,17 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-
         // Check which request we're responding to
         if (requestCode == 1 && resultCode == RESULT_OK) {
             // Make sure the request was successful
             try {
+                ImageInsertActivity n_layout = new ImageInsertActivity(getApplicationContext());
+                LinearLayout con = (LinearLayout) findViewById(R.id.con);
+                con.addView(n_layout);
                 // 선택한 이미지에서 비트맵 생성
                 InputStream in = getContentResolver().openInputStream(data.getData());
                 Bitmap img = BitmapFactory.decodeStream(in);
                 in.close();
-                // 이미지 표시
                 imageView.setImageBitmap(img);
             } catch (Exception e) {
                 e.printStackTrace();
