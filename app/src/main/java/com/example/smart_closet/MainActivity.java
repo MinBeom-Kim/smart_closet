@@ -21,11 +21,11 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity
         imageView = (ImageView) findViewById(R.id.iv1);
         Intent intent = getIntent();
         mail = intent.getStringExtra("email");
-//        name = intent.getStringExtra("name");
+        ArrayList<String> userData = (ArrayList<String>) intent.getSerializableExtra("userData");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -68,8 +68,8 @@ public class MainActivity extends AppCompatActivity
         View nav_header_view = navigationView.getHeaderView(0);
         TextView nav_header_mail_text = (TextView) nav_header_view.findViewById(R.id.user_mail);
         TextView nav_header_name_text = (TextView) nav_header_view.findViewById(R.id.user_name);
-        nav_header_mail_text.setText(mail);
-        nav_header_name_text.setText(mail);
+        nav_header_mail_text.setText(userData.get(1));
+        nav_header_name_text.setText(userData.get(0));
 
 
     }

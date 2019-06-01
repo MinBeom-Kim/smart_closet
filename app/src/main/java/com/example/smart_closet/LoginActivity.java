@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class LoginActivity extends AppCompatActivity {
 
     DatabaseHelper db;
@@ -33,11 +35,11 @@ public class LoginActivity extends AppCompatActivity {
                 String sepass = password.getText().toString();
                 Boolean chkemailpass = db.emailpassword(semail, sepass);
                 if(chkemailpass == true) {
-//                    String name = db.getUserName(semail);
+                    ArrayList<String> userData = db.getUserData(semail);
                     Toast.makeText(getApplicationContext(), semail + "님 반갑습니다", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     intent.putExtra("email", semail);
-//                    intent.putExtra("name", name);
+                    intent.putExtra("userData", userData);
                     startActivity(intent);
                 } else {
                     Toast.makeText(getApplicationContext(), "wrong email or password", Toast.LENGTH_SHORT).show();

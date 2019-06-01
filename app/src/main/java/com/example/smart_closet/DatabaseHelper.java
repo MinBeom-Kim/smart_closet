@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     public DatabaseHelper(Context context) {
@@ -47,15 +49,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         else return false;
     }
 
-//    public String getUserName(String email) {
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        Cursor cursor = db.rawQuery("select name from user where email = " + email + ";", null);
-//        String name = "default";
-//        if (cursor.moveToFirst()) {
-//            name = cursor.getString(cursor.getColumnIndex("name"));
-//        }
-//        String name = cursor.toString();
-//        return name;
-//    }
+    public ArrayList<String> getUserData(String email) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select * from user where email = '" + email + "'", null);
+        ArrayList<String> userData = new ArrayList<String>();
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                String name = cursor.getString(cursor.getColumnIndex("name"));
+                String mail = cursor.getString(cursor.getColumnIndex("email"));
+                userData.add(name);
+                userData.add(mail);
+            }
+        }
+        cursor.close();
+        return userData;
+    }
 
 }
