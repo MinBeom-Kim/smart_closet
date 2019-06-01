@@ -35,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
                 if(chkemailpass == true) {
                     Toast.makeText(getApplicationContext(), "Successfully Login", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent.putExtra("semail", semail);
                     startActivity(intent);
                 } else {
                     Toast.makeText(getApplicationContext(), "wrong email or password", Toast.LENGTH_SHORT).show();

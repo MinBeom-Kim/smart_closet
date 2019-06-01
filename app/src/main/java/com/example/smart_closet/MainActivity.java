@@ -1,6 +1,8 @@
 package com.example.smart_closet;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -18,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
@@ -26,7 +29,11 @@ import java.io.InputStream;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    DatabaseHelper DatabaseHelper;
+    SQLiteDatabase sqlDB;
     ImageView imageView;
+    TextView userName, userMail;
+    String name, mail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +43,14 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         imageView = (ImageView) findViewById(R.id.iv1);
+        userName = (TextView) findViewById(R.id.user_name);
+        userMail = (TextView) findViewById(R.id.user_mail);
+
+        Intent intent = getIntent();
+        mail = intent.getStringExtra("semail");
+
+        sqlDB = DatabaseHelper.getReadableDatabase();
+        name = sqlDB.rawQuery("select name from user where eamil=mail", null).toString();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +84,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+
+        userName.setText(name);
+        userMail.setText(mail);
         getMenuInflater().inflate(R.menu.main, menu);
+
         return true;
     }
 
