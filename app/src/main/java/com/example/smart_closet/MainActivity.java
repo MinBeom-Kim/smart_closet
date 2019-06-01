@@ -46,11 +46,11 @@ public class MainActivity extends AppCompatActivity
         userName = (TextView) findViewById(R.id.user_name);
         userMail = (TextView) findViewById(R.id.user_mail);
 
-        Intent intent = getIntent();
-        mail = intent.getStringExtra("semail");
-
-        sqlDB = DatabaseHelper.getReadableDatabase();
-        name = sqlDB.rawQuery("select name from user where eamil=mail", null).toString();
+//        Intent intent = getIntent();
+//        mail = intent.getStringExtra("semail");
+//
+//        sqlDB = DatabaseHelper.getReadableDatabase();
+//        name = sqlDB.rawQuery("select name from user where eamil=mail", null).toString();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -85,8 +85,8 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
 
-        userName.setText(name);
-        userMail.setText(mail);
+//        userName.setText(name);
+//        userMail.setText(mail);
         getMenuInflater().inflate(R.menu.main, menu);
 
         return true;
