@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     ImageView imageView;
-    String name, mail;
+    String name, mail, profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity
         Intent intent = getIntent();
         mail = intent.getStringExtra("email");
         final ArrayList<String> userData = (ArrayList<String>) intent.getSerializableExtra("userData");
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

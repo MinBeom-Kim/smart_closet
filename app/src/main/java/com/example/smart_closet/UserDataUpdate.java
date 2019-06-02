@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +29,7 @@ public class UserDataUpdate extends AppCompatActivity {
     SQLiteDatabase sqlDB;
     Bitmap img;
     String mail;
+    String img_pro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +47,7 @@ public class UserDataUpdate extends AppCompatActivity {
         pro_re = (Button) findViewById(R.id.user_profile_re);
         update = (Button) findViewById(R.id.update);
 
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         final ArrayList<String> userData = (ArrayList<String>) intent.getSerializableExtra("userData");
         mail = userData.get(0);
         email.setText(userData.get(0));
@@ -69,7 +71,7 @@ public class UserDataUpdate extends AppCompatActivity {
         pro_re.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Toast.makeText(getApplicationContext(), img_pro, Toast.LENGTH_LONG).show();
                 Toast.makeText(getApplicationContext(), "프로필이 성공적으로 등록되었습니다", Toast.LENGTH_SHORT).show();
             }
         });
@@ -77,7 +79,6 @@ public class UserDataUpdate extends AppCompatActivity {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Toast.makeText(getApplicationContext(), "회원 정보가 성공적으로 수정되었습니다", Toast.LENGTH_SHORT).show();
                 finish();
 
@@ -89,17 +90,11 @@ public class UserDataUpdate extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Check which request we're responding to
-        if (requestCode == 1 && resultCode == RESULT_OK) {
-            // Make sure the request was successful
-            try {
-                // 선택한 이미지에서 비트맵 생성
-                InputStream in = getContentResolver().openInputStream(data.getData());
-                img = BitmapFactory.decodeStream(in);
-                in.close();
-                profile.setImageBitmap(img);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        if (requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null) {
+
+            Uri uri = data.getData();
+            img_pro = uri.toString();
+            profile.setImageURI(uri);
         }
     }
 }
