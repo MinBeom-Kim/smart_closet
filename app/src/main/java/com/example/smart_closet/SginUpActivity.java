@@ -43,7 +43,7 @@ public class SginUpActivity extends AppCompatActivity {
                     if (sepass.equals(secpass)) {
                         Boolean chkemail = db.chkemail(semail);
                         if (chkemail == true) {
-                            Boolean insert = db.insert(semail, sepass, sename, profile);
+                            Boolean insert = db.user_insert(semail, sepass, sename, profile);
                             if (insert == true) {
                                 Toast.makeText(getApplicationContext(), "Registered Successfully", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);

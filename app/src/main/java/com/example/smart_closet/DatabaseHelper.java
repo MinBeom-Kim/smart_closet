@@ -17,6 +17,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table user(email text primary key, password text, name text, profile text);");
+        db.execSQL("create table clothes(clothes_id integer primary key AUTOINCREMENT, image text, link text, category text);");
+        db.execSQL("create table user_has_clothes(uhc_id integer primary key AUTOINCREMENT, user_email text, clothes_id integer, alias text, favorite integer, CONSTRAINT user_fk FOREIGN KEY(user_email) REFERENCES user(email), CONSTRAINT clothes_fk FOREIGN KEY(clothes_id) REFERENCES clothes(clothes_id));");
+
     }
 
     @Override
@@ -25,7 +28,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insert(String email, String password, String name, String profile) {
+    public boolean user_insert(String email, String password, String name, String profile) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("email", email);
@@ -35,6 +38,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         long ins = db.insert("user", null, contentValues);
         if(ins == 1) return false;
         else return true;
+    }
+
+    public boolean user_pro_update(String email, String profile) {
+//        SQLiteDatabase db = this.getWritableDatabase();
+//
+//        db.execSQL("UPDATE user SET profile ="
+//                    + profile + " WHERE email = '"
+//                    + email + "';");
+//        db.close();
+        return true;
     }
 
     public Boolean chkemail(String email) {
@@ -61,6 +74,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 String mail = cursor.getString(cursor.getColumnIndex("email"));
                 userData.add(mail);
                 userData.add(name);
+
+                
             }
         }
         cursor.close();

@@ -1,0 +1,189 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:stretchColumns="0" >
+
+    <TableRow>
+
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_gravity="center_vertical"
+            android:text="네이비색 셔츠"
+            android:textSize="15dp" />
+
+        <RatingBar
+            android:id="@+id/rbar1"
+            style="?android:attr/ratingBarStyleIndicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right" >
+        </RatingBar>
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:id="@+id/tv2"
+            android:layout_gravity="center_vertical"
+            android:text="슬림 셔츠"
+            android:textSize="15dp" />
+
+        <RatingBar
+            android:id="@+id/rbar2"
+            style="?android:attr/ratingBarStyleIndicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right" >
+        </RatingBar>
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:id="@+id/tv3"
+            android:layout_gravity="center_vertical"
+            android:text="U넥 셔츠"
+            android:textSize="15dp" />
+
+        <RatingBar
+            android:id="@+id/rbar3"
+            style="?android:attr/ratingBarStyleIndicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right" >
+        </RatingBar>
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:id="@+id/tv4"
+            android:layout_gravity="center_vertical"
+            android:text="남자 바지"
+            android:textSize="15dp" />
+
+        <RatingBar
+            android:id="@+id/rbar4"
+            style="?android:attr/ratingBarStyleIndicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right" >
+        </RatingBar>
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:id="@+id/tv5"
+            android:layout_gravity="center_vertical"
+            android:text="슬림형 바지"
+            android:textSize="15dp" />
+
+        <RatingBar
+            android:id="@+id/rbar5"
+            style="?android:attr/ratingBarStyleIndicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right" >
+        </RatingBar>
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:id="@+id/tv6"
+            android:layout_gravity="center_vertical"
+            android:text="체크무늬 바지"
+            android:textSize="15dp" />
+
+        <RatingBar
+            android:id="@+id/rbar6"
+            style="?android:attr/ratingBarStyleIndicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right" >
+        </RatingBar>
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:id="@+id/tv7"
+            android:layout_gravity="center_vertical"
+            android:text="3선 신발"
+            android:textSize="15dp" />
+
+        <RatingBar
+            android:id="@+id/rbar7"
+            style="?android:attr/ratingBarStyleIndicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right" >
+        </RatingBar>
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:id="@+id/tv8"
+            android:layout_gravity="center_vertical"
+            android:text="런닝화"
+            android:textSize="15dp" />
+
+        <RatingBar
+            android:id="@+id/rbar8"
+            style="?android:attr/ratingBarStyleIndicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right" >
+        </RatingBar>
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:id="@+id/tv9"
+            android:layout_gravity="center_vertical"
+            android:text="아디다스 신발"
+            android:textSize="15dp" />
+
+        <RatingBar
+            android:id="@+id/rbar9"
+            style="?android:attr/ratingBarStyleIndicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right" >
+        </RatingBar>
+    </TableRow>
+
+    <!--<TableRow>-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tv10"-->
+            <!--android:layout_gravity="center_vertical"-->
+            <!--android:text="미니언 T셔츠"-->
+            <!--android:textSize="15dp" />-->
+
+        <!--<RatingBar-->
+            <!--android:id="@+id/rbar10"-->
+            <!--style="?android:attr/ratingBarStyleIndicator"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="right" >-->
+        <!--</RatingBar>-->
+    <!--</TableRow>-->
+
+    <TableRow>
+
+        <Button
+            android:id="@+id/btnReturn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_span="2"
+            android:padding="30dp"
+            android:scaleType="fitEnd"
+            android:text="돌아가기" />
+    </TableRow>
+
+</TableLayout>

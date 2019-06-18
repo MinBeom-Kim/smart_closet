@@ -1,34 +1,28 @@
 package com.example.smart_closet;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.io.InputStream;
 import java.util.ArrayList;
 
 public class UserDataUpdate extends AppCompatActivity {
     DatabaseHelper db;
     TextView email;
-    EditText password, con_password, name;
+    EditText edpassword, edcon_password, edname;
     ImageView profile;
     Button pro_select, pro_re, update;
     SQLiteDatabase sqlDB;
     Bitmap img;
-    String mail;
+    String mail, pw, name;
     String img_pro;
 
     @Override
@@ -39,9 +33,9 @@ public class UserDataUpdate extends AppCompatActivity {
         db = new DatabaseHelper(this);
 
         email = (TextView) findViewById(R.id.update_email);
-        password = (EditText) findViewById(R.id.edit_password);
-        con_password = (EditText) findViewById(R.id.update_con_password);
-        name = (EditText) findViewById(R.id.edit_name);
+        edpassword = (EditText) findViewById(R.id.edit_password);
+        edcon_password = (EditText) findViewById(R.id.update_con_password);
+        edname = (EditText) findViewById(R.id.edit_name);
         profile = (ImageView) findViewById(R.id.user_profile);
         pro_select = (Button) findViewById(R.id.user_profile_select);
         pro_re = (Button) findViewById(R.id.user_profile_re);
@@ -71,8 +65,11 @@ public class UserDataUpdate extends AppCompatActivity {
         pro_re.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), img_pro, Toast.LENGTH_LONG).show();
-                Toast.makeText(getApplicationContext(), "프로필이 성공적으로 등록되었습니다", Toast.LENGTH_SHORT).show();
+                Boolean update = db.user_pro_update(mail, img_pro);
+                if (update == true) {
+                    Toast.makeText(getApplicationContext(), img_pro, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "프로필이 성공적으로 등록되었습니다", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
