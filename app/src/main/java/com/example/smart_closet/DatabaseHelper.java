@@ -74,6 +74,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return userData;
     }
 
+    public boolean user_pro_update(String email, String profile) {
+//        SQLiteDatabase db = this.getWritableDatabase();
+//
+//        db.execSQL("UPDATE user SET profile ="
+//                    + profile + " WHERE email = '"
+//                    + email + "';");
+//        db.close();
+        return true;
+    }
+
 //    public boolean closet_insert(String[] vote) {
 //        SQLiteDatabase db = this.getWritableDatabase();
 //        ContentValues contentValues = new ContentValues();
