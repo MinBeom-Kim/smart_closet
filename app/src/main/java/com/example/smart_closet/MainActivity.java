@@ -16,16 +16,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.ImageView;
-
-import com.bumptech.glide.Glide;
+import android.widget.TextView;
 
 import java.io.InputStream;
+import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    DatabaseHelper db;
     ImageView imageView;
+
+    String name, mail, profile;
+    Button btnVote;
+    Integer tvID[] = { R.id.tv1, R.id.tv2, R.id.tv3, R.id.tv4, R.id.tv5};
+    TextView tv[] = new TextView[tvID.length];
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +44,33 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
         imageView = (ImageView) findViewById(R.id.imageView);
+
+        db = new DatabaseHelper(this);
+
+
+
+
+        btnVote = (Button) findViewById(R.id.btnVote);
+
+        btnVote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), VoteActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
+
+
+        Intent intent = getIntent();
+        mail = intent.getStringExtra("email");
+//        final ArrayList<String> userData = (ArrayList<String>) intent.getSerializableExtra("userData");
+        final ArrayList<String> userData = db.getUserData(mail);
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -53,7 +89,21 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-    }
+
+
+        View nav_header_view = navigationView.getHeaderView(0);
+        TextView nav_header_mail_text = (TextView) nav_header_view.findViewById(R.id.user_mail);
+        TextView nav_header_name_text = (TextView) nav_header_view.findViewById(R.id.user_name);
+        nav_header_mail_text.setText(mail);
+        nav_header_name_text.setText(userData.get(1) + "님 안녕하세요");
+
+
+
+
+
+
+}
+
 
     @Override
     public void onBackPressed() {
@@ -117,20 +167,40 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+        if (resultCode == RESULT_OK) {
+                // Make sure the request was successful
+                try {
+                    String[] imageName = data.getStringArrayExtra("imageNmae");
+//                    ArrayList<String> imgName = db.getCloset();
+                    for (int i = 0; i < tvID.length; i++) {
+                        tv[i] = (TextView) findViewById(tvID[i]);
+                    }
 
-        // Check which request we're responding to
-        if (requestCode == 1 && resultCode == RESULT_OK) {
-            // Make sure the request was successful
-            try {
-                // 선택한 이미지에서 비트맵 생성
-                InputStream in = getContentResolver().openInputStream(data.getData());
-                Bitmap img = BitmapFactory.decodeStream(in);
-                in.close();
-                // 이미지 표시
-                imageView.setImageBitmap(img);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+                    for (int i = 0; i < tvID.length; i++) {
+                        tv[i].setText(imageName[i]);
+                    }
+
+
+//                    if (userCloset.isEmpty() != true ) {
+//                        userCloset = (ArrayList<String>) data.getSerializableExtra("voteList");
+//
+//                        Integer tvID[] = { R.id.tv1, R.id.tv2, R.id.tv3, R.id.tv4, R.id.tv5};
+//                        TextView tv[] = new TextView[userCloset.size()];
+//
+//                        for (int i = 0; i < userCloset.size(); i++) {
+//                            tv[i] = (TextView) findViewById(tvID[i]);
+//                        }
+//
+//                        // 각 TextVeiw 및 RatingBar에 넘겨 받은 값을 반영.
+//                        for (int i = 0; i < userCloset.size(); i++) {
+//                            tv[i].setText(userCloset.get(i));
+//                        }
+//                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
         }
     }
+
+
 }
